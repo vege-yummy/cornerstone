@@ -6,7 +6,7 @@ let layers = [[{
 }, {
   imageId: 'nifti:studies/5.25_HM-RA-ILD.nii.gz#z-117,t-0',
   options: {
-    name: 'NIFTI',
+    name: 'NIFTI-Z',
     opacity: 0.4,
     viewport: {
       colormap: 'copper'
@@ -19,9 +19,9 @@ let layers = [[{
     name: 'CORONAL'
   }
 }, {
-  imageId: 'nifti:studies/5.25_HM-RA-ILD.nii.gz#y-117,t-0',
+  imageId: 'nifti:studies/5.25_HM-RA-ILD.nii.gz#y-256,t-0',
   options: {
-    name: 'NIFTI',
+    name: 'NIFTI-Y',
     opacity: 0.4,
     viewport: {
       colormap: 'copper'
@@ -36,7 +36,7 @@ let layers = [[{
 }, {
   imageId: 'nifti:studies/5.25_HM-RA-ILD.nii.gz#x-117,t-0',
   options: {
-    name: 'NIFTI',
+    name: 'NIFTI-X',
     opacity: 0.4,
     viewport: {
       colormap: 'copper'

@@ -36,7 +36,9 @@ function loadLayers () {
     const layer1 = cornerstone.getLayers(mprCoronalSeriesElement)[0]
     const layer2 = cornerstone.getLayers(mprCoronalSeriesElement)[1]
     layer2.viewport.vflip = false
-    layer2.viewport.scale = layer1.viewport.scale
+    console.log(layer1)
+    console.log(layer2)
+    // layer2.viewport.scale = layer1.viewport.scale
     let a = cornerstone.getEnabledElement(mprCoronalSeriesElement)
     a.syncViewports = false
     cornerstone.updateImage(mprCoronalSeriesElement)

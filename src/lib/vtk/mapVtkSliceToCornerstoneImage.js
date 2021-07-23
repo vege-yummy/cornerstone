@@ -3,6 +3,7 @@
 export default function (vtkSlice) {
   const spacing = vtkSlice.getSpacing()
   const dimensions = vtkSlice.getDimensions()
+  console.log('dimension',dimensions)
   const scalars = vtkSlice.getPointData().getScalars()
   const dataRange = scalars.getRange(0)
   const rawData = scalars.getData()
