@@ -80,7 +80,6 @@ export default function () {
 function loadAndViewImage (element, imageId, dir) {
   const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId
   const imageIdObject = ImageId.fromURL(imageId)
-  console.log('imageIdObject', imageIdObject)
   if (dir == 'z') imageIdObject.slice.dimension = 'z'
   if (dir == 'x') imageIdObject.slice.dimension = 'x'
   if (dir == 'y') imageIdObject.slice.dimension = 'y'
