@@ -17,7 +17,6 @@ import vtkImageReslice from 'vtk.js/Sources/Imaging/Core/ImageReslice'
 export default function (vtkVolume, options = {}) {
   // Input
   const vtkImageData = vtkVolume.vtkImageData
-  console.log('create',vtkVolume.vtkImageData)
   const iop = options.imageOrientationPatient || '1,0,0,0,1,0' // Orientation
   const ipp = options.imagePositionPatient || '0,0,0' // Top Left of slice
 
@@ -54,8 +53,6 @@ export default function (vtkVolume, options = {}) {
   // This is the zAxis we set as the volume origin in `createVtkVolumeAsync`
   // NOTE: Applying rotation of 360 degrees to sagittal and coronal fixes reference lines
   // IE. clicking the blue handle 36 times.
-  console.log('~~ pre: ', ippVec3)
-  console.log('~~ zed: ', zedCosinesVec3.join())
   const position = vec3.fromValues(
     (zedCosinesVec3[0] * -1 * (ippVec3[0] - x0)) + x0,
     (zedCosinesVec3[1] * (ippVec3[1] - y0)) + y0,

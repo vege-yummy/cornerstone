@@ -25,7 +25,7 @@ async function createImage (imageId) {
   const mappedSlice = mapVtkSliceToCornerstoneImage(createSliceResult.slice)
   _createMprMetaData(imageId, createSliceResult.metaData)
 
-  console.log(mappedSlice.pixelData)
+  
   
   const image = {
     imageId,

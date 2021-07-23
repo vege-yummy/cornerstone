@@ -2,6 +2,7 @@ import * as cornerstone from 'cornerstone-core'
 import { import as csTools, store } from 'cornerstone-tools'
 import getMprUrl from './lib/getMprUrl.js'
 import { vec3 } from 'gl-matrix'
+import setLayers from './setLayers.js'
 
 const BaseTool = csTools('base/BaseTool')
 
@@ -28,6 +29,7 @@ export default class MprMouseWheelTool extends BaseTool {
 
   mouseWheelCallback (evt) {
     const { direction: images, element } = evt.detail
+
     const { loop, allowSkipping, invert } = this.configuration
     const direction = invert ? -images : images
     const dir = direction > 0 ? 1 : -1
@@ -38,7 +40,7 @@ export default class MprMouseWheelTool extends BaseTool {
 
     // TODO: Use pixel spacing to determine best "step size"
     // Ideally, minimum value where we would see pixel change
-    const stepSize = 3
+    const stepSize = 1
     const iop = imagePlane.imageOrientationPatient
     const rowCosines = vec3.fromValues(iop[0], iop[1], iop[2])
     const colCosines = vec3.fromValues(iop[3], iop[4], iop[5])
@@ -62,10 +64,14 @@ export default class MprMouseWheelTool extends BaseTool {
     const iopString = imagePlane.rowCosines.concat(imagePlane.columnCosines).join()
     const ippString = new Float32Array(ipp).join()
     const mprImageUrl = getMprUrl(iopString, ippString)
-    console.log(mprImageUrl)
+
+    if (element.id === 'axial-target') { setLayers(ipp[2], element) } 
+    else if (element.id === 'coronal-target') { setLayers(ipp[1],element) }
 
     cornerstone.loadAndCacheImage(mprImageUrl).then(image => {
+      console.log(image)
       cornerstone.displayImage(element, image)
+
       _updateAllMprEnabledElements()
     })
   }
