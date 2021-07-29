@@ -67,11 +67,11 @@ export default class MprMouseWheelTool extends BaseTool {
 
     if (element.id === 'axial-target') { setLayers(ipp[2], element) } 
     else if (element.id === 'coronal-target') { setLayers(ipp[1], element) }
+    else if(element.id==='sagittal-target'){setLayers(ipp[0], element) }
 
     cornerstone.loadAndCacheImage(mprImageUrl).then(image => {
       console.log(image)
       cornerstone.displayImage(element, image)
-
       _updateAllMprEnabledElements()
     })
   }

@@ -43,6 +43,23 @@ function loadLayers () {
     a.syncViewports = false
     cornerstone.updateImage(mprCoronalSeriesElement)
   })
+  loadImages(2).then(function (images) {
+    images.forEach(function (image, index) {
+      const layer = layers[2][index]
+      const layerId = cornerstone.addLayer(mprSagittalSeriesElement, image, layer.options)
+
+      cornerstone.updateImage(mprSagittalSeriesElement)
+    })
+    const layer1 = cornerstone.getLayers(mprSagittalSeriesElement)[0]
+    const layer2 = cornerstone.getLayers(mprSagittalSeriesElement)[1]
+    layer2.viewport.vflip = false
+    console.log(layer1)
+    console.log(layer2)
+    // layer2.viewport.scale = layer1.viewport.scale
+    let a = cornerstone.getEnabledElement(mprSagittalSeriesElement)
+    a.syncViewports = false
+    cornerstone.updateImage(mprSagittalSeriesElement)
+  })
 }
 
 function loadImages (i) {
@@ -115,9 +132,9 @@ async function kickstartApp () {
   // const sagittalMprUrl = getMprUrl(sagittalIopAsString, "69.3642578125,0,0");
   const sagittalMprUrl = getMprUrl(sagittalIopAsString)
   // console.log(sagittalMprUrl) // mpr:0:0,1,0,0,0,-1:center
-  cornerstone.loadAndCacheImage(sagittalMprUrl).then(image => {
-    cornerstone.displayImage(mprSagittalSeriesElement, image)
-  })
+ // cornerstone.loadAndCacheImage(sagittalMprUrl).then(image => {
+  //  cornerstone.displayImage(mprSagittalSeriesElement, image)
+ // })
 }
 
 kickstartApp()
