@@ -58,9 +58,6 @@ export default class MprMouseWheelTool extends BaseTool {
     ipp[1] += dy
     ipp[2] += dz
 
-    console.info('deltas: ', dx, dy, dz)
-    console.info('pos: ', ipp[0], ipp[1], ipp[2])
-
     const iopString = imagePlane.rowCosines.concat(imagePlane.columnCosines).join()
     const ippString = new Float32Array(ipp).join()
     const mprImageUrl = getMprUrl(iopString, ippString)
@@ -70,7 +67,7 @@ export default class MprMouseWheelTool extends BaseTool {
     else if(element.id==='sagittal-target'){setLayers(ipp[0], element) }
 
     cornerstone.loadAndCacheImage(mprImageUrl).then(image => {
-      console.log(image)
+    //  console.log(image)
       cornerstone.displayImage(element, image)
       _updateAllMprEnabledElements()
     })

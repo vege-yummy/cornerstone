@@ -163,8 +163,8 @@ export default class MprTool extends BaseAnnotationTool {
           const deltaRotationInDegrees = deltaRotation * (180 / Math.PI)
           const angleInDegrees = refToolState.appliedAngleRadians * (180 / Math.PI)
 
-          console.log('deltaRotation: ', deltaRotationInDegrees)
-          console.log('applied angle: ', angleInDegrees)
+         // console.log('deltaRotation: ', deltaRotationInDegrees)
+         // console.log('applied angle: ', angleInDegrees)
 
           const rotateFn = mat4[`rotate${this.configuration.rotationAxis}`]
           const refImagePlane = metaData.get('imagePlaneModule', refImage.imageId)
@@ -289,6 +289,7 @@ export default class MprTool extends BaseAnnotationTool {
      * @memberof AstCrossPoint
      */
   postMouseDownCallback (evt) {
+    console.log('postMouseDownCallback',evt)
     this.updatePoint(evt)
     evt.preventDefault()
     evt.stopPropagation()

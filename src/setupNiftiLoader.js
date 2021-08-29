@@ -46,11 +46,14 @@ export default function () {
     var currentSlice = parseInt(currentImageId.substr(currentImageId.indexOf('#') + 3))
     var wheelNum = parseInt(evt.deltaY / 4)
     var nextSlice = currentSlice + wheelNum
+    /*
     if (currentSlice + wheelNum < 0) {
       nextSlice = 0
     } else if (currentSlice + wheelNum > 234) {
       nextSlice = 234
     }
+    */
+   console.log('n',nextSlice)
     cornerstone.loadAndCacheImage('nifti:studies/5.25_HM-RA-ILD.nii.gz#x-' + nextSlice.toString() + ',t-0').then(
       image => {
         cornerstone.displayImage(nifti_x, image)
@@ -62,11 +65,14 @@ export default function () {
     var currentSlice = parseInt(currentImageId.substr(currentImageId.indexOf('#') + 3))
     var wheelNum = parseInt(evt.deltaY / 4)
     var nextSlice = currentSlice + wheelNum
+    /*
     if (currentSlice + wheelNum < 0) {
       nextSlice = 0
     } else if (currentSlice + wheelNum > 234) {
       nextSlice = 234
     }
+    */
+    console.log('next', nextSlice)
     cornerstone.loadAndCacheImage('nifti:studies/5.25_HM-RA-ILD.nii.gz#y-' + nextSlice.toString() + ',t-0').then(
       image => {
         cornerstone.displayImage(nifti_y, image)
@@ -74,8 +80,6 @@ export default function () {
     )
   })
 }
-
-
 
 function loadAndViewImage (element, imageId, dir) {
   const ImageId = cornerstoneNIFTIImageLoader.nifti.ImageId
@@ -93,10 +97,9 @@ function loadAndViewImage (element, imageId, dir) {
         imageIds: Array.from(Array(numberOfSlices), (_, i) => `nifti:${imageIdObject.filePath}#${imageIdObject.slice.dimension}-${i},t-0`)
       }
       const viewport = cornerstone.getDefaultViewportForImage(element, image)
+      console.log(viewport)
       cornerstone.displayImage(element, image, viewport)
       cornerstone.resize(element, true)
-
-
     }, function (err) {
       throw err
       alert(err)

@@ -81,7 +81,6 @@ export default function (vtkVolume, options = {}) {
   const spacing = outputSlice.getSpacing()
   const dimensions = outputSlice.getDimensions()
   const bounds = outputSlice.getBounds()
-  //console.log(spacing, dimensions, bounds)
 
   const result = {
     slice: outputSlice,
@@ -102,7 +101,6 @@ export default function (vtkVolume, options = {}) {
       }
     }
   }
-  console.log('result',result)
 
   return result
 }

@@ -34,7 +34,7 @@ let layers = [[{
     name: 'SAGITTAL'
   }
 }, {
-  imageId: 'nifti:studies/5.25_HM-RA-ILD.nii.gz#x-117,t-0',
+  imageId: 'nifti:studies/5.25_HM-RA-ILD.nii.gz#x-254,t-0',
   options: {
     name: 'NIFTI-X',
     opacity: 0.4,

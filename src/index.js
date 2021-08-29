@@ -15,7 +15,6 @@ function loadLayers () {
     images.forEach(function (image, index) {
       const layer = layers[0][index]
       const layerId = cornerstone.addLayer(mprAxialSeriesElement, image, layer.options)
-
       cornerstone.updateImage(mprAxialSeriesElement)
     })
     const layer1 = cornerstone.getLayers(mprAxialSeriesElement)[0]
@@ -36,14 +35,15 @@ function loadLayers () {
     const layer1 = cornerstone.getLayers(mprCoronalSeriesElement)[0]
     const layer2 = cornerstone.getLayers(mprCoronalSeriesElement)[1]
     layer2.viewport.vflip = false
-    console.log(layer1)
-    console.log(layer2)
-    // layer2.viewport.scale = layer1.viewport.scale
+
+    layer2.viewport.scale = layer1.viewport.scale
+    layer2.image.rowPixelSpacing = 1.54
     let a = cornerstone.getEnabledElement(mprCoronalSeriesElement)
     a.syncViewports = false
     cornerstone.updateImage(mprCoronalSeriesElement)
   })
   loadImages(2).then(function (images) {
+    
     images.forEach(function (image, index) {
       const layer = layers[2][index]
       const layerId = cornerstone.addLayer(mprSagittalSeriesElement, image, layer.options)
@@ -53,9 +53,9 @@ function loadLayers () {
     const layer1 = cornerstone.getLayers(mprSagittalSeriesElement)[0]
     const layer2 = cornerstone.getLayers(mprSagittalSeriesElement)[1]
     layer2.viewport.vflip = false
-    console.log(layer1)
-    console.log(layer2)
-    // layer2.viewport.scale = layer1.viewport.scale
+    layer2.viewport.hflip=true
+    layer2.viewport.scale = layer1.viewport.scale
+    layer2.image.rowPixelSpacing = 1.54
     let a = cornerstone.getEnabledElement(mprSagittalSeriesElement)
     a.syncViewports = false
     cornerstone.updateImage(mprSagittalSeriesElement)
@@ -118,9 +118,9 @@ async function kickstartApp () {
   // const coronalMprUrl = getMprUrl(coronalIopAsString, "0,69.3642578125,0");
   const coronalMprUrl = getMprUrl(coronalIopAsString)
   // console.log(coronalMprUrl) // mpr:0:1,0,0,0,0,-1:center
- // cornerstone.loadAndCacheImage(coronalMprUrl).then(image => {
- //   cornerstone.displayImage(mprCoronalSeriesElement, image)
- // })
+  // cornerstone.loadAndCacheImage(coronalMprUrl).then(image => {
+  //   cornerstone.displayImage(mprCoronalSeriesElement, image)
+  // })
 
   // ~~ SAGITTAL
   // Image orientation patient (IOP)
@@ -132,9 +132,9 @@ async function kickstartApp () {
   // const sagittalMprUrl = getMprUrl(sagittalIopAsString, "69.3642578125,0,0");
   const sagittalMprUrl = getMprUrl(sagittalIopAsString)
   // console.log(sagittalMprUrl) // mpr:0:0,1,0,0,0,-1:center
- // cornerstone.loadAndCacheImage(sagittalMprUrl).then(image => {
+  // cornerstone.loadAndCacheImage(sagittalMprUrl).then(image => {
   //  cornerstone.displayImage(mprSagittalSeriesElement, image)
- // })
+  // })
 }
 
 kickstartApp()
