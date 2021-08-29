@@ -17,6 +17,7 @@ import cornerstoneTools, {
   store
 } from 'cornerstone-tools'
 
+import setLayers from './setLayers.js'
 import renderReferenceLine from './renderReferenceLine.js'
 import getMprUrl from './lib/getMprUrl.js'
 import tryGetVtkVolumeForSeriesNumber from './lib/vtk/tryGetVtkVolumeForSeriesNumber.js'
@@ -289,7 +290,7 @@ export default class MprTool extends BaseAnnotationTool {
      * @memberof AstCrossPoint
      */
   postMouseDownCallback (evt) {
-    console.log('postMouseDownCallback',evt)
+    //console.log('postMouseDownCallback',evt)
     this.updatePoint(evt)
     evt.preventDefault()
     evt.stopPropagation()
@@ -349,6 +350,9 @@ export default class MprTool extends BaseAnnotationTool {
    * @returns
    */
 const _updatePoint = async function (evt) {
+  const mprAxialSeriesElement = document.getElementById('axial-target')
+const mprCoronalSeriesElement = document.getElementById('coronal-target')
+const mprSagittalSeriesElement = document.getElementById('sagittal-target')
   const eventData = evt.detail
   evt.stopImmediatePropagation()
 
@@ -396,12 +400,31 @@ const _updatePoint = async function (evt) {
     const ippString = new Float32Array([ippVec3[0], ippVec3[1], ippVec3[2]]).join()
 
     const mprImageId = getMprUrl(iopString, ippString)
+    
+    if (element.id === 'axial-target')
+    {
+      setLayers(ipp.y, mprCoronalSeriesElement)
+      setLayers(ipp.x, mprSagittalSeriesElement)
+    }
 
+    if (element.id === 'coronal-target')
+    {
+     
+      setLayers(ipp.z, mprAxialSeriesElement)
+      setLayers(ipp.x, mprSagittalSeriesElement)
+    }
+
+    if (element.id === 'sagittal-target')
+    {
+     
+      setLayers(ipp.z, mprAxialSeriesElement)
+      setLayers(ipp.y, mprCoronalSeriesElement)
+    }
     // LOADS IMAGE
     loadAndCacheImage(mprImageId).then(image => {
       displayImage(targetElement, image, getViewport(targetElement))
     })
-
+    _updateAllMprEnabledElements()
     // SET CROSS POINT
     const crossPoint = _projectPatientPointToImagePlane(ippCrossVec3, targetImagePlane)
     this.crossPoint = crossPoint
@@ -485,4 +508,13 @@ function _calculateRotationAxes (rowCosines, colCosines, ippArray) {
   )
 
   return axes
+}
+function _updateAllMprEnabledElements () {
+  store.state.enabledElements.forEach(refElement => {
+    const refImage = cornerstone.getImage(refElement)
+
+    if (refImage && refImage.imageId.includes('mpr')) {
+      cornerstone.updateImage(refElement)
+    }
+  })
 }
