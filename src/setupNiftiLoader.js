@@ -1,6 +1,7 @@
 import * as cornerstone from 'cornerstone-core'
 import * as cornerstoneMath from 'cornerstone-math'
 import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader'
+import data from './global'
 export default function () {
   // setDependency
   cornerstoneNIFTIImageLoader.external.cornerstone = cornerstone
@@ -19,7 +20,7 @@ export default function () {
   cornerstone.enable(nifti_y, {
     renderer: 'webgl'
   })
-  let url = 'studies/5.25_HM-RA-ILD.nii.gz'
+  let url = 'studies/'+data.niipath
   loadAndViewImage(nifti_z, `nifti:${url}`, 'z')
   loadAndViewImage(nifti_x, `nifti:${url}`, 'x')
   loadAndViewImage(nifti_y, `nifti:${url}`, 'y')
@@ -35,7 +36,7 @@ export default function () {
     } else if (currentSlice + wheelNum > 234) {
       nextSlice = 234
     }
-    cornerstone.loadAndCacheImage('nifti:studies/5.25_HM-RA-ILD.nii.gz#z-' + nextSlice.toString() + ',t-0').then(
+    cornerstone.loadAndCacheImage('nifti:'+url+'#z-' + nextSlice.toString() + ',t-0').then(
       image => {
         cornerstone.displayImage(nifti_z, image)
       }
@@ -54,7 +55,7 @@ export default function () {
     }
     */
    console.log('n',nextSlice)
-    cornerstone.loadAndCacheImage('nifti:studies/5.25_HM-RA-ILD.nii.gz#x-' + nextSlice.toString() + ',t-0').then(
+    cornerstone.loadAndCacheImage('nifti:'+url+'#x-' + nextSlice.toString() + ',t-0').then(
       image => {
         cornerstone.displayImage(nifti_x, image)
       }
@@ -73,7 +74,7 @@ export default function () {
     }
     */
     console.log('next', nextSlice)
-    cornerstone.loadAndCacheImage('nifti:studies/5.25_HM-RA-ILD.nii.gz#y-' + nextSlice.toString() + ',t-0').then(
+    cornerstone.loadAndCacheImage('nifti:'+url+'#y-' + nextSlice.toString() + ',t-0').then(
       image => {
         cornerstone.displayImage(nifti_y, image)
       }

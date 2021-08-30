@@ -7,7 +7,7 @@
       main {
         margin: 0;
         padding: 0;
-        height: 1024px;
+        height: 1024px; 
         width: 1536px;
         overflow-x: hidden;
       }
@@ -22,22 +22,32 @@
         min-width: 512px;
        max-height: 512px;
       }
-     
+     button{
+       width: 120px;
+     }
     </style>
   </head>
 
   <body>
-    <main class="container">
-
+    
+    <main>
+     <div>
+       <button id="button1">1</button>
+       <button id="button2">2</button>
+       <button id="button3">3</button>
+      
+      </div>
       <!-- Only bit necessary for Cornerstone -->
      <!--<div id="cornerstone-target" class="item"></div>--> 
-      <div id="axial-target" class="item"></div>
+     <div class="container">
+         <div id="axial-target" class="item"></div>
       <div id="coronal-target" class="item"></div>
       <div id="sagittal-target" class="item"></div>
       <div id="nifti-image-z" class="item"></div>
       <div id="nifti-image-y" class="item"></div>
       <div id="nifti-image-x" class="item"></div>
-      <div id="example" class="item"></div>
+     </div>
+    
     </main>
 
     <script src="main.js"></script>

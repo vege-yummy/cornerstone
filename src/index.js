@@ -7,10 +7,14 @@ import getMprUrl from './lib/getMprUrl.js'
 import setupNiftiLoader from './setupNiftiLoader.js'
 import { mat4 } from 'gl-matrix'
 import layers from './layers.js'
+import data from './global.js'
 import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader'
 const mprAxialSeriesElement = document.getElementById('axial-target')
 const mprCoronalSeriesElement = document.getElementById('coronal-target')
 const mprSagittalSeriesElement = document.getElementById('sagittal-target')
+const button1 = document.getElementById('button1')
+const button2 = document.getElementById('button2')
+const button3 = document.getElementById('button3')
 function loadLayers () {
   loadImages(0).then(function (images) {
     images.forEach(function (image, index) {
@@ -39,12 +43,14 @@ function loadLayers () {
 
     layer2.viewport.scale = layer1.viewport.scale
     layer2.image.rowPixelSpacing = 1.54
+    if (data.num === 3) {
+      layer2.image.rowPixelSpacing = 1.62
+    }
     let a = cornerstone.getEnabledElement(mprCoronalSeriesElement)
     a.syncViewports = false
     cornerstone.updateImage(mprCoronalSeriesElement)
   })
   loadImages(2).then(function (images) {
-
     images.forEach(function (image, index) {
       const layer = layers[2][index]
       const layerId = cornerstone.addLayer(mprSagittalSeriesElement, image, layer.options)
@@ -54,9 +60,12 @@ function loadLayers () {
     const layer1 = cornerstone.getLayers(mprSagittalSeriesElement)[0]
     const layer2 = cornerstone.getLayers(mprSagittalSeriesElement)[1]
     layer2.viewport.vflip = false
-    layer2.viewport.hflip=true
+    layer2.viewport.hflip = true
     layer2.viewport.scale = layer1.viewport.scale
     layer2.image.rowPixelSpacing = 1.54
+    if (data.num === 3) {
+      layer2.image.rowPixelSpacing = 1.62
+    }
     let a = cornerstone.getEnabledElement(mprSagittalSeriesElement)
     a.syncViewports = false
     cornerstone.updateImage(mprSagittalSeriesElement)
@@ -77,8 +86,8 @@ async function kickstartApp () {
   // Setup
   const seriesNumber = 0
   setupCornerstone(seriesNumber)
- // setupNiftiLoader()
- cornerstoneNIFTIImageLoader.external.cornerstone = cornerstone
+  // setupNiftiLoader()
+  cornerstoneNIFTIImageLoader.external.cornerstone = cornerstone
 
   cornerstoneNIFTIImageLoader.nifti.streamingMode = true
   // const originalSeriesElement = document.getElementById('cornerstone-target')
@@ -139,6 +148,25 @@ async function kickstartApp () {
   //  cornerstone.displayImage(mprSagittalSeriesElement, image)
   // })
 }
+
+async function changeDicom () {
+  button1.addEventListener('click', function () {
+    /*
+    data.num = 1
+    data.niipath = '5.25_HM-RA-ILD.nii.gz'
+    layers.niipath = '5.25_HM-RA-ILD.nii.gz'
+    layers.z = 117
+    layers.x = 254
+    layers.y = 256
+    loadLayers()
+    */
+  })
+  button2.addEventListener('click', function () {
+    data.num = 2
+    console.log(data)
+  })
+}
+changeDicom()
 
 kickstartApp()
 loadLayers()

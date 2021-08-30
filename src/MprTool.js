@@ -164,8 +164,8 @@ export default class MprTool extends BaseAnnotationTool {
           const deltaRotationInDegrees = deltaRotation * (180 / Math.PI)
           const angleInDegrees = refToolState.appliedAngleRadians * (180 / Math.PI)
 
-         // console.log('deltaRotation: ', deltaRotationInDegrees)
-         // console.log('applied angle: ', angleInDegrees)
+          // console.log('deltaRotation: ', deltaRotationInDegrees)
+          // console.log('applied angle: ', angleInDegrees)
 
           const rotateFn = mat4[`rotate${this.configuration.rotationAxis}`]
           const refImagePlane = metaData.get('imagePlaneModule', refImage.imageId)
@@ -290,7 +290,7 @@ export default class MprTool extends BaseAnnotationTool {
      * @memberof AstCrossPoint
      */
   postMouseDownCallback (evt) {
-    //console.log('postMouseDownCallback',evt)
+    // console.log('postMouseDownCallback',evt)
     this.updatePoint(evt)
     evt.preventDefault()
     evt.stopPropagation()
@@ -351,8 +351,8 @@ export default class MprTool extends BaseAnnotationTool {
    */
 const _updatePoint = async function (evt) {
   const mprAxialSeriesElement = document.getElementById('axial-target')
-const mprCoronalSeriesElement = document.getElementById('coronal-target')
-const mprSagittalSeriesElement = document.getElementById('sagittal-target')
+  const mprCoronalSeriesElement = document.getElementById('coronal-target')
+  const mprSagittalSeriesElement = document.getElementById('sagittal-target')
   const eventData = evt.detail
   evt.stopImmediatePropagation()
 
@@ -400,23 +400,18 @@ const mprSagittalSeriesElement = document.getElementById('sagittal-target')
     const ippString = new Float32Array([ippVec3[0], ippVec3[1], ippVec3[2]]).join()
 
     const mprImageId = getMprUrl(iopString, ippString)
-    
-    if (element.id === 'axial-target')
-    {
+
+    if (element.id === 'axial-target') {
       setLayers(ipp.y, mprCoronalSeriesElement)
       setLayers(ipp.x, mprSagittalSeriesElement)
     }
 
-    if (element.id === 'coronal-target')
-    {
-     
+    if (element.id === 'coronal-target') {
       setLayers(ipp.z, mprAxialSeriesElement)
       setLayers(ipp.x, mprSagittalSeriesElement)
     }
 
-    if (element.id === 'sagittal-target')
-    {
-     
+    if (element.id === 'sagittal-target') {
       setLayers(ipp.z, mprAxialSeriesElement)
       setLayers(ipp.y, mprCoronalSeriesElement)
     }
