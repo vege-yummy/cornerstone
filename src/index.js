@@ -7,6 +7,7 @@ import getMprUrl from './lib/getMprUrl.js'
 import setupNiftiLoader from './setupNiftiLoader.js'
 import { mat4 } from 'gl-matrix'
 import layers from './layers.js'
+import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader'
 const mprAxialSeriesElement = document.getElementById('axial-target')
 const mprCoronalSeriesElement = document.getElementById('coronal-target')
 const mprSagittalSeriesElement = document.getElementById('sagittal-target')
@@ -43,7 +44,7 @@ function loadLayers () {
     cornerstone.updateImage(mprCoronalSeriesElement)
   })
   loadImages(2).then(function (images) {
-    
+
     images.forEach(function (image, index) {
       const layer = layers[2][index]
       const layerId = cornerstone.addLayer(mprSagittalSeriesElement, image, layer.options)
@@ -76,8 +77,10 @@ async function kickstartApp () {
   // Setup
   const seriesNumber = 0
   setupCornerstone(seriesNumber)
-  setupNiftiLoader()
+ // setupNiftiLoader()
+ cornerstoneNIFTIImageLoader.external.cornerstone = cornerstone
 
+  cornerstoneNIFTIImageLoader.nifti.streamingMode = true
   // const originalSeriesElement = document.getElementById('cornerstone-target')
 
   // var ctx = canvas.getContext('2d')
