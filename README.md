@@ -1,7 +1,7 @@
 # cornerstone-vtk-mpr
 
 ## Commands
-
+- 改变global.js中的num可以切换图片
 - `npm run build`: Bundled output
 - `npm run dev`: Active development; preview at `http://localhost:9000`
 

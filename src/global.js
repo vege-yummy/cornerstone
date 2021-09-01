@@ -1,4 +1,4 @@
-let num0 = 1
+let num0 = 3
 const niipath1 = '5.25_HM-RA-ILD.nii.gz'
 const niipath2 = '_0727add5.25_CAL-IAC.nii.gz'
 const niipath3 = '_0727add5.25_CZE-ILD.nii.gz'
