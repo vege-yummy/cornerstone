@@ -9,8 +9,7 @@ if (data.num === 1) {
   series[0] = study1
 } else if (data.num === 2) {
   series[0] = study2
-}else if(data.num===3)
-{
+} else if (data.num === 3) {
   series[0] = study3
 }
 

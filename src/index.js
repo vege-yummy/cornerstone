@@ -4,9 +4,13 @@ import setupCornerstone from './setupCornerstone.js'
 import appState from './appState.js'
 import getUrlForImageId from './lib/getUrlForImageId.js'
 import getMprUrl from './lib/getMprUrl.js'
-import setupNiftiLoader from './setupNiftiLoader.js'
+// import setupNiftiLoader from './setupNiftiLoader.js'
 import { mat4 } from 'gl-matrix'
 import layers from './layers.js'
+import layers1 from './layers1.js'
+import layers2 from './layers2.js'
+import layers3 from './layers3.js'
+
 import data from './global.js'
 import * as cornerstoneNIFTIImageLoader from 'cornerstone-nifti-image-loader'
 const mprAxialSeriesElement = document.getElementById('axial-target')
@@ -15,6 +19,7 @@ const mprSagittalSeriesElement = document.getElementById('sagittal-target')
 const button1 = document.getElementById('button1')
 const button2 = document.getElementById('button2')
 const button3 = document.getElementById('button3')
+
 function loadLayers () {
   loadImages(0).then(function (images) {
     images.forEach(function (image, index) {
@@ -143,30 +148,17 @@ async function kickstartApp () {
   const sagittalIopAsString = sagittalIop.join()
   // const sagittalMprUrl = getMprUrl(sagittalIopAsString, "69.3642578125,0,0");
   const sagittalMprUrl = getMprUrl(sagittalIopAsString)
-  // console.log(sagittalMprUrl) // mpr:0:0,1,0,0,0,-1:center
-  // cornerstone.loadAndCacheImage(sagittalMprUrl).then(image => {
-  //  cornerstone.displayImage(mprSagittalSeriesElement, image)
-  // })
 }
 
 async function changeDicom () {
   button1.addEventListener('click', function () {
-    /*
-    data.num = 1
-    data.niipath = '5.25_HM-RA-ILD.nii.gz'
-    layers.niipath = '5.25_HM-RA-ILD.nii.gz'
-    layers.z = 117
-    layers.x = 254
-    layers.y = 256
-    loadLayers()
-    */
-   // window.location.reload()
+  // mprAxialSeriesElement.style.display = 'none'
   })
   button2.addEventListener('click', function () {
-    data.num = 2
+    
   })
 }
-changeDicom()
 
+changeDicom()
 kickstartApp()
 loadLayers()

@@ -57,7 +57,6 @@ async function createImage (imageId) {
   }
 
   // console.log('~~ CREATE IMAGE: ', image)
-
   return image
 }
 
