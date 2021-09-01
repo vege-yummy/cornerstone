@@ -14,6 +14,5 @@ if (num0 === 1) {
 let data = {
   num: num0,
   niipath
-
 }
 export default data

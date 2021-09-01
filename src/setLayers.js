@@ -65,11 +65,9 @@ function loadLayers (i, element) {
       const newlayer1 = cornerstone.getLayers(element)[0]
       let newlayer2 = cornerstone.getLayers(element)[1]
       if (i === 0) { // 第一张图
-        //console.log(newlayer2.image.imageId)
         newlayer2.viewport.vflip = true
         newlayer2.viewport.scale = newlayer1.viewport.scale
       } else if (i === 1) {
-       // console.log(newlayer2.image.imageId)
         if (index===1) { // nii
           if (data.num===1) { // 第一套图
             newlayer2.image.rowPixelSpacing=1.54
@@ -82,7 +80,6 @@ function loadLayers (i, element) {
         }
         newlayer2.viewport.scale = newlayer1.viewport.scale
       } else if (i === 2) { // 第三张图
-       // console.log(newlayer2.image.imageId)
         if (index===1) {
           newlayer2.viewport.hflip=true
 

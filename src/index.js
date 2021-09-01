@@ -160,10 +160,10 @@ async function changeDicom () {
     layers.y = 256
     loadLayers()
     */
+   // window.location.reload()
   })
   button2.addEventListener('click', function () {
     data.num = 2
-    console.log(data)
   })
 }
 changeDicom()
